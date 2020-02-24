@@ -5,7 +5,7 @@
  *  @licence >> GNU GPLv3
  */
 
-export function assert (selector)
+function assert (selector)
 {
     if (selector == null)
     {
@@ -15,32 +15,32 @@ export function assert (selector)
     return selector;
 }
 
-export function getCurrencyPrefix (text)
+function getCurrencyPrefix (text)
 {
     return text.match(/^\S+/)[0];
 }
 
-export function toNumber (text)
+function toNumber (text)
 {
     return String(text).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 ')
 }
 
-export function toFloat (text)
+function toFloat (text)
 {
     return parseFloat(text.replace(/[^0-9\.\-]/g, ''));
 }
 
-export function toDate (text)
+function toDate (text)
 {
     return new Date(parseInt(text.split('.')[2]), parseInt(text.split('.')[1]) - 1, parseInt(text.split('.')[0]));
 }
 
-export function insertElementBefore (element, node)
+function insertElementBefore (element, node)
 {
     node.parentNode.insertBefore(element, node);
 }
 
-export function getElementByAttribute (elements, attribute, value)
+function getElementByAttribute (elements, attribute, value)
 {
     for (var i = 0; i < elements.length; i++)
     {
@@ -53,7 +53,7 @@ export function getElementByAttribute (elements, attribute, value)
     return null;
 }
 
-export const DomMonitor = (function ()
+const DomMonitor = (function ()
 {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     
@@ -85,7 +85,7 @@ export const DomMonitor = (function ()
     }
 })();
 
-export const DomMonitorAggressive = (function ()
+const DomMonitorAggressive = (function ()
 {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var ready            = true;
@@ -103,7 +103,7 @@ export const DomMonitorAggressive = (function ()
             {
                 if (ready && (ready = false) == false)
                 {
-                    callback(mutations); setTimeout(function () {ready = true}, 0.2);
+                    callback(mutations); setTimeout(function () {ready = true;}, 0.2);
                 }
             });
             
@@ -120,3 +120,5 @@ export const DomMonitorAggressive = (function ()
         }
     }
 })();
+
+export { DomMonitorAggressive as D, assert as a, toDate as b, toNumber as c, getCurrencyPrefix as d, DomMonitor as e, getElementByAttribute as g, insertElementBefore as i, toFloat as t };

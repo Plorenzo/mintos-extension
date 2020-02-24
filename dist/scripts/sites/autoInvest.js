@@ -1,11 +1,11 @@
+import { a as assert, i as insertElementBefore, t as toFloat } from '../../util-5887b449.js';
+
 /*
  *  @project >> Investment.Extensions: Mintos
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
-
-import {assert, toFloat, insertElementBefore} from '../common/util';
 
 chrome.storage.sync.get
 (
@@ -31,7 +31,7 @@ chrome.storage.sync.get
                 var table           = assert(document.querySelector('.autoinvest-list'));
                 var tableHead       = assert(document.querySelector('.autoinvest-list__head'));
                 var tableBody       = assert(document.querySelector('.autoinvest-list__body'));
-                var callbacks       = assert([])
+                var callbacks       = assert([]);
             }
             catch
             {

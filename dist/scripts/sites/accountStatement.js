@@ -1,11 +1,11 @@
+import { a as assert, D as DomMonitorAggressive } from '../../util-5887b449.js';
+
 /*
  *  @project >> Investment.Extensions: Mintos
  *  @authors >> DeeNaxic, o1-steve, Raphael Krupinski
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
-
-import {assert, DomMonitorAggressive} from '../common/util';
 
 chrome.storage.sync.get
 (
@@ -91,7 +91,7 @@ chrome.storage.sync.get
                         always_a.classList.add('active');
                         document.querySelector('#period-from').value = '1.1.1950';
                         document.querySelector('#period-to')  .value = '1.1.2050';
-                        document.querySelector('#filter-button').click()
+                        document.querySelector('#filter-button').click();
                     });
                     
                     const always_li = document.createElement('li');
@@ -103,7 +103,7 @@ chrome.storage.sync.get
                     {
                         e.addEventListener('click', function (event) {
                             always_a.classList.remove('active');
-                        })
+                        });
                     });
                 }
                 

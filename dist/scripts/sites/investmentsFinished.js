@@ -1,12 +1,12 @@
-﻿/*
+import { a as assert, e as DomMonitor, b as toDate, g as getElementByAttribute } from '../../util-5887b449.js';
+import '../../investments-6ecb2394.js';
+
+/*
  *  @project >> Investment.Extensions: Mintos
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
-
-import './investments'
-import {assert, getElementByAttribute, DomMonitor, toDate} from '../common/util';
 
 chrome.storage.sync.get
 (
@@ -83,7 +83,7 @@ chrome.storage.sync.get
             function createTooltip (text)
             {
                 var nodeOuter = document.createElement('th');
-                var nodeInner = document.createElement('i')
+                var nodeInner = document.createElement('i');
                     nodeInner.classList.add('fas');
                     nodeInner.classList.add('fa-info-circle');
                     nodeInner.classList.add('tooltip-color-gray');
@@ -196,7 +196,7 @@ chrome.storage.sync.get
                             node.onclick = function (e)
                             {
                                 window.location.href = createLink('pledge_groups[]', data[e.target.innerText]);
-                            }
+                            };
                     }
                 });
             }

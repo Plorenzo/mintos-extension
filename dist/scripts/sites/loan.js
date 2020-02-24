@@ -1,12 +1,12 @@
+import { r as rating } from '../../data-2daf36c7.js';
+import { a as assert, b as toDate, g as getElementByAttribute, i as insertElementBefore, c as toNumber, t as toFloat, d as getCurrencyPrefix } from '../../util-5887b449.js';
+
 /*
  *  @project >> Investment.Extensions: Mintos
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
-
-import {rating} from '../common/data'
-import {assert, getCurrencyPrefix, getElementByAttribute, toDate, toFloat, toNumber, insertElementBefore} from '../common/util';
 
 chrome.storage.sync.get
 (
@@ -84,7 +84,7 @@ chrome.storage.sync.get
                 var nodeOuter = document.createElement('tr');
                     
                 var nodeInner             = document.createElement('td');
-                    nodeInner.innerText   = localization('Warning') + ': ' + header
+                    nodeInner.innerText   = localization('Warning') + ': ' + header;
                     nodeInner.style.color = 'red';
                     nodeInner.classList.add('field-description');
                     nodeOuter.appendChild(nodeInner);
@@ -189,9 +189,7 @@ chrome.storage.sync.get
                     }
                     else
                     if (element.lastChild.innerText == localization('$Scheduled'))
-                    {
-                        
-                    }
+                    ;
                     else
                     {
                         $others++;
@@ -353,9 +351,7 @@ chrome.storage.sync.get
                     }
                     else
                     if (element.lastChild.innerText == localization('$Scheduled'))
-                    {
-                        
-                    }
+                    ;
                     else
                     {
                         $others++;

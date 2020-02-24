@@ -1,12 +1,12 @@
+import { a as assert, g as getElementByAttribute, e as DomMonitor, b as toDate } from '../../util-5887b449.js';
+import '../../investments-6ecb2394.js';
+
 /*
  *  @project >> Investment.Extensions: Mintos
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
-
-import './investments';
-import {assert, getElementByAttribute, DomMonitor, toDate} from '../common/util';
 
 chrome.storage.sync.get
 (
@@ -183,7 +183,7 @@ chrome.storage.sync.get
                             node.onclick = function (e)
                             {
                                 window.location.href = createLink('pledge_groups[]', data[e.target.innerText]);
-                            }
+                            };
                     }
                 });
             }

@@ -1,12 +1,12 @@
+import { i as iso_code } from '../../data-2daf36c7.js';
+import { a as assert, D as DomMonitorAggressive, t as toFloat } from '../../util-5887b449.js';
+
 /*
  *  @project >> Investment.Extensions: Mintos
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
-
-import {iso_code} from '../common/data'
-import {assert, DomMonitorAggressive, toFloat} from '../common/util';
 
 chrome.storage.sync.get
 (
@@ -88,7 +88,7 @@ chrome.storage.sync.get
                 function $insertPercentageCell (source, total)
                 {
                     var percent = toFloat(source.innerText) / total * 100.00;
-                    var node    = source.parentElement.querySelector('.percent')
+                    var node    = source.parentElement.querySelector('.percent');
                     
                     if (node == undefined)
                     {
@@ -234,12 +234,12 @@ chrome.storage.sync.get
                                     function ()
                                     {
                                         line.style.color = '#d1d1d1';
-                                    })
-                                })
-                            }
+                                    });
+                                });
+                            };
                         }
                     }
-                })
+                });
             }
             
             /*

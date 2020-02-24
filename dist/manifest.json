@@ -1,0 +1,109 @@
+{
+  "manifest_version": 2,
+  "name": "Investment Extensions: Mintos",
+  "version": "1.4.1",
+  "description": "This extension aims to improve the Mintos.com experience, with additional features and post-processing of the website.",
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": false
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_popup": "options/index.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "assets/polyfills-34eaa132.js"
+      ],
+      "matches": [
+        "https://www.mintos.com/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/overview-0b2a37f3.js"
+      ],
+      "matches": [
+        "https://www.mintos.com/en/overview/*",
+        "https://www.mintos.com/de/ubersicht/*",
+        "https://www.mintos.com/pl/przeglad/*",
+        "https://www.mintos.com/cs/prehled-uctu/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/loan-783c40e7.js"
+      ],
+      "matches": [
+        "https://www.mintos.com/en/*",
+        "https://www.mintos.com/de/*",
+        "https://www.mintos.com/pl/*",
+        "https://www.mintos.com/cs/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/investmentsFinished-1425bfce.js"
+      ],
+      "matches": [
+        "https://www.mintos.com/en/my-investments/finished-investments/*",
+        "https://www.mintos.com/de/meine-investitionen/finished-investments-de/*",
+        "https://www.mintos.com/pl/moje-inwestycje/finished-investments-pl/*",
+        "https://www.mintos.com/cs/moje-investice/finished-investments-cs/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/investmentsCurrent-9f8a7b58.js"
+      ],
+      "matches": [
+        "https://www.mintos.com/en/my-investments/current-investments/*",
+        "https://www.mintos.com/de/meine-investitionen/current-investments-de/*",
+        "https://www.mintos.com/pl/moje-inwestycje/current-investments-pl/*",
+        "https://www.mintos.com/cs/moje-investice/current-investments-cs/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/autoInvest-0bccd95c.js"
+      ],
+      "matches": [
+        "https://www.mintos.com/en/invest-en/auto-invest/*",
+        "https://www.mintos.com/de/investieren-de/auto-invest-de/*",
+        "https://www.mintos.com/pl/inwestuj-pl/auto-invest-pl/*",
+        "https://www.mintos.com/cs/investovat-cs/auto-invest-cz/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/accountStatement-cfaaec5e.js"
+      ],
+      "matches": [
+        "https://www.mintos.com/en/account-statement/*",
+        "https://www.mintos.com/de/kontoauszug/*",
+        "https://www.mintos.com/pl/wyciag-z-konta/*",
+        "https://www.mintos.com/cs/vypis-z-uctu/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "data-2daf36c7.js",
+    "util-5887b449.js",
+    "investments-6ecb2394.js",
+    "scripts/common/polyfills.js",
+    "scripts/sites/overview.js",
+    "scripts/sites/loan.js",
+    "scripts/sites/investmentsFinished.js",
+    "scripts/sites/investmentsCurrent.js",
+    "scripts/sites/autoInvest.js",
+    "scripts/sites/accountStatement.js"
+  ]
+}

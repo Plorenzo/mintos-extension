@@ -1,11 +1,11 @@
+import { a as assert, e as DomMonitor, g as getElementByAttribute } from './util-5887b449.js';
+
 /*
  *  @project >> Investment.Extensions: Mintos
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
-
-import {assert, getElementByAttribute, DomMonitor} from '../common/util';
 
 chrome.storage.sync.get
 (
@@ -60,7 +60,7 @@ chrome.storage.sync.get
             function createTooltip (text)
             {
                 var nodeOuter = document.createElement('th');
-                var nodeInner = document.createElement('i')
+                var nodeInner = document.createElement('i');
                     nodeInner.classList.add('fas');
                     nodeInner.classList.add('fa-info-circle');
                     nodeInner.classList.add('tooltip-color-gray');
