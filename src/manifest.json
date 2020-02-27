@@ -119,6 +119,17 @@
             [
                 "scripts/sites/accountStatement.js"
             ]
+        },
+        {
+            "matches" :
+            [
+                "https://www.mintos.com/en/invest-en/primary-market/*",
+                "https://www.mintos.com/en/invest-en/secondary-market/*"
+            ],
+            "js"      : 
+            [
+                "scripts/sites/invest.js"
+            ]
         }
     ]
 }

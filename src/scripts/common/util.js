@@ -120,3 +120,78 @@ var DomMonitorAggressive = (function ()
         }
     }
 })();
+
+/**
+ * Create DOM node from html string. Returned value is actually a DocumentFragment instance.
+ * This allows you to parse HTML with more than one root element and getting a single Node object as a result.
+ * The caveat is that if you call otherNode.append(yourParsedNode) you'll end up with that DocumentFragment empty,
+ * as all its children are *moved* to the new parent. Access .firstChild or .children to keep a reference to the
+ * parsed nodes.
+ *
+ * @param {String} html - String with HTML markup.
+ * @returns {DocumentFragment} DocumentFragment that can be added as a child to an existing node.
+ */
+function parseElement (html)
+{
+    const container = document.createElement('template');
+    container.innerHTML = html.trim();
+    return container.content;
+}
+
+/**
+ * Wait for elements matched by given selectors to be available in the document.
+ * When all selectors match against the document, the resulting promise'strNotEmpty resolve method is called
+ * with a mapping of selector to a matching node. If however the timeout is reached before all selectors match,
+ * the promise'strNotEmpty fail method is called with the time passed (millis).
+ * The timeout is checked when any mutations are detected in the target node.
+ *
+ * @param {Map} selectors - list of selectors to match against document.
+ * @param {Element} from
+ * @param {number} timeout - time in milliseconds after the resulting promise fails.
+ * @returns {Promise}
+ */
+function onNodesAvailable (selectors, from = null, timeout = 30000)
+{
+    const start = new Date().getTime();
+    from = from || document;
+    
+    function queryAllSelectors (selectors, from = null)
+    {
+        const result = {};
+        for (const name in selectors)
+        {
+            const selector = selectors[name];
+            const node = from.querySelector(selector);
+            if (!node)
+                return null;
+            result[name] = node;
+        }
+        return result;
+    }
+    
+    return new Promise((resolve, reject) =>
+    {
+        
+        const mo = new MutationObserver(function (mutations)
+        {
+            const nodes = queryAllSelectors(selectors, from);
+            if (nodes)
+            {
+                mo.disconnect();
+                resolve(nodes);
+                return;
+            }
+            const totalWait = new Date().getTime() - start;
+            if (totalWait >= timeout)
+            {
+                mo.disconnect();
+                reject(new Error(`Selectors didn't resolve within timeout of ${totalWait}ms`));
+            }
+        });
+        
+        mo.observe(from, {
+            childList : true,
+            subtree   : true
+        });
+    });
+}
