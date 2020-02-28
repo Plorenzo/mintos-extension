@@ -126,9 +126,14 @@
                 "https://www.mintos.com/en/invest-en/primary-market/*",
                 "https://www.mintos.com/en/invest-en/secondary-market/*"
             ],
-            "js"      : 
+            "js"      :
             [
-                "scripts/sites/invest.js"
+                "scripts/sites/invest.js",
+                "components/relativeDate/index.js"
+            ],
+            "css"     :
+            [
+                "components/relativeDate/index.css"
             ]
         }
     ]
