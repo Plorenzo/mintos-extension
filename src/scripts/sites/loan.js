@@ -7,6 +7,7 @@
 
 import {rating} from '../common/data'
 import {assert, getCurrencyPrefix, getElementByAttribute, toDate, toFloat, toNumber, insertElementBefore} from '../common/util';
+import latePaymentHistogram from "../../components/paymentDelay";
 
 chrome.storage.sync.get
 (
@@ -401,6 +402,11 @@ chrome.storage.sync.get
                     }
                 }
             }
+    
+            const root = document.querySelector('#chart-wrapper');
+            const chartContainer = document.createElement('div');
+            latePaymentHistogram(chartContainer);
+            root.append(chartContainer);
         }
         
         function localization (field)
