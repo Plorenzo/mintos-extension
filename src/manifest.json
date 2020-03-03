@@ -35,6 +35,10 @@
             "js"        :
             [
                 "scripts/common/polyfills.js"
+            ],
+            "css"     :
+            [
+                "styles/index.css"
             ]
         },
         {
@@ -123,12 +127,7 @@
             ],
             "js"      :
             [
-                "scripts/sites/invest.js",
-                "components/relativeDate/index.js"
-            ],
-            "css"     :
-            [
-                "components/relativeDate/index.css"
+                "scripts/sites/invest.js"
             ]
         }
     ]

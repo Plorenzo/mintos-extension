@@ -1,0 +1,11 @@
+.invext-reldate-container {
+    display: flex;
+}
+
+input.invext-reldate-value {
+    flex: 5;
+}
+
+select.invext-reldate-unit {
+    flex: 2;
+}

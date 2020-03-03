@@ -1,3 +1,5 @@
+import {render as _render} from 'lit-html';
+
 /*
  *  @project >> Investment.Extensions: Mintos
  *  @authors >> DeeNaxic, o1-steve
@@ -33,6 +35,16 @@ export function toFloat (text)
 export function toDate (text)
 {
     return new Date(parseInt(text.split('.')[2]), parseInt(text.split('.')[1]) - 1, parseInt(text.split('.')[0]));
+}
+
+/**
+ * convert Date to string as per Mintos format
+ * @param {Date} d
+ * @returns {string}
+ */
+export function dateToStr (d)
+{
+    return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear();
 }
 
 export function insertElementBefore (element, node)
@@ -122,19 +134,20 @@ export const DomMonitorAggressive = (function ()
 })();
 
 /**
- * Create DOM node from html string. Returned value is actually a DocumentFragment instance.
- * This allows you to parse HTML with more than one root element and getting a single Node object as a result.
- * The caveat is that if you call otherNode.append(yourParsedNode) you'll end up with that DocumentFragment empty,
- * as all its children are *moved* to the new parent. Access .firstChild or .children to keep a reference to the
- * parsed nodes.
+ * Render TemplateResult created by lit-html.
  *
- * @param {String} html - String with HTML markup.
- * @returns {DocumentFragment} DocumentFragment that can be added as a child to an existing node.
+ * template = (text) => html`<div>${text}</div>`;
+ * const node = render(template('hello world'))
+ *
+ * @param {TemplateResult} templateResult
+ * @param {ParentNode} [container=HTMLTemplateElement]
+ * @returns {ParentNode} target, or if not passed, a new DocumentFragment, with the rendered template
  */
-function parseElement (html)
+export function render (templateResult, container = null)
 {
-    const container = document.createElement('template');
-    container.innerHTML = html.trim();
+    // using <template/> element for the browser defer its execution (e.g. loading images)
+    container = container || document.createElement('template');
+    _render(templateResult, container.content);
     return container.content;
 }
 
@@ -150,7 +163,7 @@ function parseElement (html)
  * @param {number} timeout - time in milliseconds after the resulting promise fails.
  * @returns {Promise}
  */
-function onNodesAvailable (selectors, from = null, timeout = 30000)
+export function onNodesAvailable (selectors, from = undefined, timeout = 30000)
 {
     const start = new Date().getTime();
     from = from || document;
@@ -195,3 +208,8 @@ function onNodesAvailable (selectors, from = null, timeout = 30000)
         });
     });
 }
+
+/**
+ * User language as detected from the current page URL
+ */
+export const userLang = document.location.pathname.substring(1, 3);
