@@ -1,7 +1,5 @@
 {
     "name"              : "Investment Extensions: Mintos",
-    "description"       : "This extension aims to improve the Mintos.com experience, with additional features and post-processing of the website.",
-    "version"           : "1.4.1",
     "manifest_version"  : 2,
     
     "options_ui"        :
@@ -36,8 +34,7 @@
             ],
             "js"        :
             [
-                "scripts/common/util.js",
-                "scripts/common/data.js"
+                "scripts/common/polyfills.js"
             ]
         },
         {
@@ -76,7 +73,6 @@
             ],
             "js"        :
             [
-                "scripts/sites/investments.js",
                 "scripts/sites/investmentsFinished.js"
             ]
         },
@@ -90,7 +86,6 @@
             ],
             "js"        :
             [
-                "scripts/sites/investments.js",
                 "scripts/sites/investmentsCurrent.js"
             ]
         },
