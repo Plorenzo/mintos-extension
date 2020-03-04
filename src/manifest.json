@@ -35,6 +35,9 @@
             "js"        :
             [
                 "scripts/common/polyfills.js"
+            ],
+            "css": [
+                "styles/index.css"
             ]
         },
         {

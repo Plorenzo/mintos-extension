@@ -1,23 +1,24 @@
 'use strict';
 import Chart from 'chart.js';
-import {html, render as _render} from 'lit-html';
+import {html, render} from 'lit-html';
 
 /**
  * Render a Chart.js chart
- * 
+ *
  * @param {ParentNode} target
  * @param {string} type - chart.js chart type
  * @param {Map} data
  * @param {Map} options
  */
-export default function chart (target, type, data, options)
+export default function chart (type, data, options, target = undefined)
 {
     data = data || {};
     options = options || {};
+    target = target || document.createElement('template').content;
     
-    _render(html`
-            <div style="position: relative">
-                <canvas style="width: 100px; height: 100%"></canvas>
+    render(html`
+            <div class="invext-chart-container">
+                <canvas/>
             </div>
         `, target);
     const ctx = target.querySelector('canvas').getContext('2d');
@@ -64,4 +65,6 @@ export default function chart (target, type, data, options)
     {
         chart.resize();
     });
+    
+    return target;
 }
