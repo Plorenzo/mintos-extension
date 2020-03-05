@@ -84,7 +84,7 @@ function localization (key)
             {
                 'de' : 'Verspätete Tage',
                 'pl' : 'Dni opóźnienia',
-                'cs' : 'Dní pozdě',
+                'cs' : 'Dní v prodlení',
                 'es' : '?',
                 'lv' : '?',
                 'ru' : '?'
