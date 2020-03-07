@@ -214,6 +214,12 @@ chrome.storage.sync.get
                         $ontime++;
                         histogram[0] = (histogram[0] || 0) + 1;
                     }
+                    else if (paymentStatus === localization('$Late'))
+                    {
+                        ++$others;
+                        const days = toDays(today() - toDate(element.children[0].innerText));
+                        histogram[days] = (histogram[days] || 0) + 1;
+                    }
                     else
                     {
                         $others++;
