@@ -6,7 +6,7 @@
  */
 
 import './investments'
-import {assert, getElementByAttribute, DomMonitor, toDate} from '../common/util';
+import {assert, getElementByAttribute, DomMonitor, toDate, toDays} from '../common/util';
 
 chrome.storage.sync.get
 (
@@ -113,7 +113,10 @@ chrome.storage.sync.get
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
                         var cells = rows[i].querySelectorAll('td');
-                        var days  = Math.floor(Math.abs((toDate(rows[i].querySelector('td.m-loan-issued').innerText).getTime() - toDate(getElementByAttribute(cells, 'data-m-label', localization('$Finished')).innerText).getTime()) / 86400000));
+
+                        const loanIssued = rows[i].querySelector('td.m-loan-issued');
+                        const finished   = getElementByAttribute(cells, 'data-m-label', localization('$Finished'));
+                        const days       = toDays(toDate(finished.innerText) - toDate(loanIssued.innerText));
                         var node  = getElementByAttribute(cells, 'data-m-label', 'Duration');
                         
                         if (node === null)
