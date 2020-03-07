@@ -1,7 +1,7 @@
 div.invext-chart-container {
     position: relative;
-    height: 60%;
-    width: 60%;
+    height: 50%;
+    width: 50%;
 }
 
 .invext-chart-container canvas {

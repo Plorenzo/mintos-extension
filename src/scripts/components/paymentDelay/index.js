@@ -1,4 +1,4 @@
-import {html, render as _render} from 'lit-html';
+import {html, render} from 'lit-html';
 import chart from '../chartjs';
 
 const chartOptions = {
@@ -17,27 +17,46 @@ const chartOptions = {
     scales                      : {
         xAxes : [
             {
+                gridLines  : {
+                    display : false,
+                },
                 scaleLabel : {
                     display     : true,
                     labelString : localization('Days late'),
                 },
-            }
+            },
         ],
         yAxes : [
             {
+                position   : 'right',
                 scaleLabel : {
                     display     : true,
                     labelString : localization('No of payments'),
                 },
                 ticks      :
                     {
-                        beginAtZero : true
-                    }
-            }
+                        beginAtZero : true,
+                        stepSize    : 1,
+                    },
+            },
         ],
     },
-    tooltip                     : {
-        enabled : false,
+    tooltips                    : {
+        callbacks : {
+            label : function ({label, value})
+            {
+                return Number(label) ?
+                    localization('y payments were late by x days')({
+                        y : value,
+                        x : label
+                    }) :
+                    localization('y payments were on time')(value);
+            },
+            title : function ()
+            {
+                return '';
+            },
+        },
     },
 };
 
@@ -53,9 +72,8 @@ export function latePaymentHistogramChart (data, target = null)
 {
     target = target || document.createElement('template').content;
     
-    const labels = Array(data.length);
-    labels[0] = localization('On-time');
-    for (let i = 1; i < data.length; i++)
+    const labels = Array(Math.max(data.length, 15));
+    for (let i = 0; i < labels.length; i++)
         labels[i] = i;
     
     const chartData = {
@@ -63,11 +81,13 @@ export function latePaymentHistogramChart (data, target = null)
         datasets : [
             {
                 data,
-                backgroundColor : ({dataIndex}) => dataIndex === 0 ? '#0db000' : '#b0010c',
+                backgroundColor    : ({dataIndex}) => dataIndex === 0 ? '#0db000' : '#b0010c',
+                barPercentage      : 1.0,
+                categoryPercentage : 1.0,
             }],
     };
     
-    _render(html`
+    render(html`
 <div class="m-group-info mod-pt-28">
     <h3>${localization('Late Payments Histogram')}</h3>
     ${chart('bar', chartData, chartOptions)}
@@ -80,8 +100,9 @@ export function latePaymentHistogramChart (data, target = null)
 function localization (key)
 {
     const translations = {
-        'Days late'               :
+        'Days late'                      :
             {
+                'en' : 'Days late',
                 'de' : 'Verspätete Tage',
                 'pl' : 'Dni opóźnienia',
                 'cs' : 'Dní v prodlení',
@@ -89,8 +110,9 @@ function localization (key)
                 'lv' : '?',
                 'ru' : '?'
             },
-        'No of payments'          :
+        'No of payments'                 :
             {
+                'en' : 'No of payments',
                 'de' : 'Anz. der Zahlungen',
                 'pl' : 'Liczba płatności',
                 'cs' : 'Počet plateb',
@@ -98,8 +120,9 @@ function localization (key)
                 'lv' : '?',
                 'ru' : '?'
             },
-        'On-time'                 :
+        'On-time'                        :
             {
+                'en' : 'On-time',
                 'de' : 'Pünktlich',
                 'pl' : 'Na czas',
                 'cs' : 'Včas',
@@ -107,8 +130,9 @@ function localization (key)
                 'lv' : '?',
                 'ru' : '?'
             },
-        'Late Payments Histogram' :
+        'Late Payments Histogram'        :
             {
+                'en' : 'Late Payments Histogram',
                 'de' : 'Histogramm von verspäteten Zahlungen',
                 'pl' : 'Histogram opóźnień płatności',
                 'cs' : 'Histogram opožděných plateb',
@@ -116,7 +140,20 @@ function localization (key)
                 'lv' : '?',
                 'ru' : '?'
             },
+        'y payments were late by x days' :
+            {
+                en : ({x, y}) => `${y} payments ${x} days late`,
+                de : ({x, y}) => `${y} Zahlungen ${x} Tage verspätet`,
+                pl : ({x, y}) => `${y} płatności spóźnionych o ${x} dni`,
+            },
+        'y payments were on time'        :
+            {
+                en : (y) => `${y} on-time payments`,
+                de : (y) => `${y} pünktliche Zahlungen`,
+                pl : (y) => `${y} płatności na czas`,
+            }
     };
     
-    return translations[key][document.location.pathname.substring(1, 3)] || key
+    return translations[key][document.location.pathname.substring(1, 3)] ||
+        translations[key].en;
 }
