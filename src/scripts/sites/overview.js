@@ -6,7 +6,7 @@
  */
 
 import {iso_code} from '../common/data'
-import {assert, DomMonitorAggressive, toFloat} from '../common/util';
+import {assert, DomMonitorAggressive, insertElementBefore, toFloat} from '../common/util';
 
 chrome.storage.sync.get
 (
