@@ -6,7 +6,7 @@
  */
 
 import './investments'
-import {assert, DomMonitor, getCurrencyPrefix, getElementByAttribute, toDate} from '../common/util';
+import {assert, DomMonitor, getCurrencyPrefix, getElementByAttribute, toDate, toFloat} from '../common/util';
 
 chrome.storage.sync.get
 (
